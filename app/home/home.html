@@ -1,9 +1,8 @@
 <div class="row" ng-if="!socketConnected">
-    <div class="col-md-4 col-md-offset-4">
+    <div class="col-md-8 col-md-offset-2">
         <div class="page-header">
             <h2>PiCloud Info</h2>
         </div>
-        <p class="lead">Enter the URL and API Key for your PiCloud server's info socket to start veiwing information about connected clients.</p>
         <form name="socketSettingsForm">
             <div class="form-group">
                 <label for="socketURL">URL:</label>
@@ -14,14 +13,17 @@
                 <input class="form-control" ng-model="settings.apiKey" type="text" name="apiKey" value="" required>
             </div>
             <div class="form-group" ng-if="socketSettingsForm.$valid">
-                <button class="btn btn-primary btn-block" ng-click="startSocket()" type="button" name="button">Connect</button>
+                <button class="btn btn-primary btn-block" ng-click="connect()" type="button" name="button">
+                    <span ng-if="!isConnecting">Connect</span>
+                    <span ng-if="isConnecting">Connecting...</span>
+                </button>
             </div>
         </form>
     </div>
 </div>
 
 <div class="row" ng-if="socketConnected">
-    <div class="col-md-4 col-md-offset-4">
+    <div class="col-md-8 col-md-offset-2">
         <div class="page-header">
             <h2>Subscriptions <small>as of {{infoCreatedAt | date:'medium'}}</small></h2>
         </div>
@@ -42,5 +44,8 @@
                 </tr>
             </tbody>
         </table>
+        <div class="">
+            <button class="btn btn-danger btn-block" ng-click="disconnect()" type="button" name="button">Disconnect</button>
+        </div>
     </div>
 </div>
