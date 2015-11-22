@@ -19,3 +19,28 @@
         </form>
     </div>
 </div>
+
+<div class="row" ng-if="socketConnected">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="page-header">
+            <h2>Subscriptions <small>as of {{infoCreatedAt | date:'medium'}}</small></h2>
+        </div>
+        <div class="alert alert-info" ng-if="!picloudInfo.length">
+            <span>No event subscriptions</span>
+        </div>
+        <table class="table" ng-if="picloudInfo.length">
+            <thead>
+                <th>Event</th>
+                <th>IP Address</th>
+                <th>Connected</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="i in picloudInfo | orderBy:['name', '-connectedAt']">
+                    <td>{{i.name}}</td>
+                    <td>{{i.ipAddress}}</td>
+                    <td>{{i.connectedAt | date:'medium'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
