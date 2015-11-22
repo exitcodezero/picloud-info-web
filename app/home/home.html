@@ -1,0 +1,51 @@
+<div class="row" ng-if="!socketConnected">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="page-header">
+            <h2>PiCloud Info</h2>
+        </div>
+        <form name="socketSettingsForm">
+            <div class="form-group">
+                <label for="socketURL">URL:</label>
+                <input class="form-control" ng-model="settings.url" type="text" name="socketURL" value="" required>
+            </div>
+            <div class="form-group">
+                <label for="url">API Key:</label>
+                <input class="form-control" ng-model="settings.apiKey" type="text" name="apiKey" value="" required>
+            </div>
+            <div class="form-group" ng-if="socketSettingsForm.$valid">
+                <button class="btn btn-primary btn-block" ng-click="connect()" type="button" name="button">
+                    <span ng-if="!isConnecting">Connect</span>
+                    <span ng-if="isConnecting">Connecting...</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row" ng-if="socketConnected">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="page-header">
+            <h2>Subscriptions <small>as of {{infoCreatedAt | date:'medium'}}</small></h2>
+        </div>
+        <div class="alert alert-info" ng-if="!picloudInfo.length">
+            <span>No event subscriptions</span>
+        </div>
+        <table class="table" ng-if="picloudInfo.length">
+            <thead>
+                <th>Event</th>
+                <th>IP Address</th>
+                <th>Connected</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="i in picloudInfo | orderBy:['name', '-connectedAt']">
+                    <td>{{i.name}}</td>
+                    <td>{{i.ipAddress}}</td>
+                    <td>{{i.connectedAt | date:'medium'}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="">
+            <button class="btn btn-danger btn-block" ng-click="disconnect()" type="button" name="button">Disconnect</button>
+        </div>
+    </div>
+</div>
