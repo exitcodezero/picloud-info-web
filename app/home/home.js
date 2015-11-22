@@ -9,6 +9,35 @@ angular.module('myApp.home', ['ngRoute'])
   });
 }])
 
-.controller('HomeCtrl', [function() {
+.controller('HomeCtrl', ['$scope', '$websocket', function($scope, $websocket) {
+
+    $scope.settings = {
+        url: '',
+        apiKey: ''
+    };
+    $scope.picloudInfo = {};
+    $scope.errorMessage = "";
+
+    $scope.startSocket = function () {
+        $scope.errorMessage = "";
+        var websocketUrl = $scope.settings.url + "?apiKey=" + $scope.settings.apiKey;
+        var socket = $websocket(websocketUrl);
+        socket.onMessage(function(message) {
+            $scope.picloudInfo = JSON.parse(message.data);
+        });
+        socket.onError(function() {
+            $scope.errorMessage = "Socket error";
+        });
+        socket.onClose(function() {
+            $scope.errorMessage = "Socket closed";
+        });
+    };
+
+    $scope.resetSettings = function () {
+        $scope.settings = {
+            url: '',
+            apiKey: ''
+        };
+    };
 
 }]);
