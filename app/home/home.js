@@ -21,10 +21,8 @@ angular.module('myApp.home', ['ngRoute'])
     $scope.picloudInfo = [];
     $scope.infoCreatedAt = null;
     $scope.isConnecting = false;
-    $scope.errorMessage = "";
 
     $scope.connect = function () {
-        $scope.errorMessage = "";
         $scope.isConnecting = true;
         var websocketUrl = $scope.settings.url + "?apiKey=" + $scope.settings.apiKey;
         socket = $websocket(websocketUrl);
@@ -41,13 +39,11 @@ angular.module('myApp.home', ['ngRoute'])
             $scope.isConnecting = false;
             $scope.socketConnected = false;
             $scope.resetSettings();
-            $scope.errorMessage = "Socket error";
         });
         socket.onClose(function () {
             $scope.isConnecting = false;
             $scope.socketConnected = false;
             $scope.resetSettings();
-            $scope.errorMessage = "Socket closed";
         });
     };
 
