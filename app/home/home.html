@@ -37,7 +37,7 @@
                 <th>Connected</th>
             </thead>
             <tbody>
-                <tr ng-repeat="i in picloudInfo | orderBy:['name', '-connectedAt']">
+                <tr ng-repeat="i in picloudInfo.subscriptions | orderBy:['name', '-connectedAt']">
                     <td>{{i.name}}</td>
                     <td>{{i.ipAddress}}</td>
                     <td>{{i.connectedAt | date:'medium'}}</td>
