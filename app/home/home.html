@@ -25,6 +25,25 @@
 <div class="row" ng-if="socketConnected">
     <div class="col-md-8 col-md-offset-2">
         <div class="page-header">
+            <h2>Connections <small>as of {{infoCreatedAt | date:'medium'}}</small></h2>
+        </div>
+        <div class="alert alert-info" ng-if="!picloudInfo.connections.length">
+            <span>No connections</span>
+        </div>
+        <table class="table" ng-if="picloudInfo.connections.length">
+            <thead>
+                <th>IP Address</th>
+                <th>Connected</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="i in picloudInfo.connections | orderBy:'-connectedAt'">
+                    <td>{{i.ipAddress}}</td>
+                    <td>{{i.connectedAt | date:'medium'}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="page-header">
             <h2>Subscriptions <small>as of {{infoCreatedAt | date:'medium'}}</small></h2>
         </div>
         <div class="alert alert-info" ng-if="!picloudInfo.subscriptions.length">
