@@ -27,10 +27,10 @@
         <div class="page-header">
             <h2>Subscriptions <small>as of {{infoCreatedAt | date:'medium'}}</small></h2>
         </div>
-        <div class="alert alert-info" ng-if="!picloudInfo.length">
+        <div class="alert alert-info" ng-if="!picloudInfo.subscriptions.length">
             <span>No event subscriptions</span>
         </div>
-        <table class="table" ng-if="picloudInfo.length">
+        <table class="table" ng-if="picloudInfo.subscriptions.length">
             <thead>
                 <th>Event</th>
                 <th>IP Address</th>
