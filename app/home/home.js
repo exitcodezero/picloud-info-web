@@ -62,22 +62,24 @@ angular.module('myApp.home', ['ngRoute'])
     };
 
     function formatInfoData (infoData) {
-        var result = [];
-        if (!infoData.events) {
-            return result;
-        }
-        infoData.events.forEach(function (eventItem) {
-            if (eventItem.connections) {
-                eventItem.connections.forEach(function (connectionItem) {
-                    result.push({
-                        name: eventItem.name,
-                        ipAddress: connectionItem.ip_address,
-                        connectedAt: connectionItem.connected_at
+        var results = {
+            subscriptions: [],
+            connections: []
+        };
+        if (infoData.subscriptions) {
+            infoData.subscriptions.forEach(function (subItem) {
+                if (subItem.connections) {
+                    subItem.connections.forEach(function (connectionItem) {
+                        results.subscriptions.push({
+                            name: subItem.name,
+                            ipAddress: connectionItem.ip_address,
+                            connectedAt: connectionItem.connected_at
+                        });
                     });
-                });
-            }
-        });
-        return result;
+                }
+            });
+        }
+        return results;
     }
 
 }]);
