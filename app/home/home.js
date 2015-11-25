@@ -69,14 +69,22 @@ angular.module('myApp.home', ['ngRoute'])
         if (infoData.subscriptions) {
             infoData.subscriptions.forEach(function (subItem) {
                 if (subItem.connections) {
-                    subItem.connections.forEach(function (connectionItem) {
+                    subItem.connections.forEach(function (connItem) {
                         results.subscriptions.push({
                             name: subItem.name,
-                            ipAddress: connectionItem.ip_address,
-                            connectedAt: connectionItem.connected_at
+                            ipAddress: connItem.ip_address,
+                            connectedAt: connItem.connected_at
                         });
                     });
                 }
+            });
+        }
+        if (infoData.all_connections) {
+            infoData.all_connections.forEach(function (connItem) {
+                results.connections.push({
+                    ipAddress: connItem.ip_address,
+                    connectedAt: connItem.connected_at
+                });
             });
         }
         return results;
