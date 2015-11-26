@@ -32,11 +32,13 @@
         </div>
         <table class="table" ng-if="picloudInfo.connections.length">
             <thead>
+                <th>Client Name</th>
                 <th>IP Address</th>
                 <th>Connected</th>
             </thead>
             <tbody>
                 <tr ng-repeat="i in picloudInfo.connections | orderBy:'-connectedAt'">
+                    <td>{{i.clientName}}</td>
                     <td>{{i.ipAddress}}</td>
                     <td>{{i.connectedAt | date:'medium'}}</td>
                 </tr>
@@ -52,12 +54,14 @@
         <table class="table" ng-if="picloudInfo.subscriptions.length">
             <thead>
                 <th>Event</th>
+                <th>Client Name</th>
                 <th>IP Address</th>
                 <th>Connected</th>
             </thead>
             <tbody>
-                <tr ng-repeat="i in picloudInfo.subscriptions | orderBy:['name', '-connectedAt']">
-                    <td>{{i.name}}</td>
+                <tr ng-repeat="i in picloudInfo.subscriptions | orderBy:['subscriptionName', '-connectedAt']">
+                    <td>{{i.subscriptionName}}</td>
+                    <td>{{i.clientName}}</td>
                     <td>{{i.ipAddress}}</td>
                     <td>{{i.connectedAt | date:'medium'}}</td>
                 </tr>
