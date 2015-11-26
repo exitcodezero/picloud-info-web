@@ -71,7 +71,8 @@ angular.module('myApp.home', ['ngRoute'])
                 if (subItem.connections) {
                     subItem.connections.forEach(function (connItem) {
                         results.subscriptions.push({
-                            name: subItem.name,
+                            subscriptionName: subItem.name,
+                            clientName: connItem.client_name,
                             ipAddress: connItem.ip_address,
                             connectedAt: connItem.connected_at
                         });
@@ -82,6 +83,7 @@ angular.module('myApp.home', ['ngRoute'])
         if (infoData.all_connections) {
             infoData.all_connections.forEach(function (connItem) {
                 results.connections.push({
+                    clientName: connItem.client_name,
                     ipAddress: connItem.ip_address,
                     connectedAt: connItem.connected_at
                 });
